@@ -58,16 +58,17 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+|
 🔹 Nombre: {character['Nombre']}
-| Raza: {character['Raza']}
+|  Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
-| Género: {character['Género']}
+|  Género: {character['Género']}
 🔹 Registro: {character['Fecha de Registro']}
-| SC: {character['SC']}
+|  SC: {character['SC']}
 🔹 Rank: {character['RANK']}
-| Nexo: {character['NEXO']}
+|  Nexo: {character['NEXO']}
 🔹 TR: {character['TR']}
-| Priv: {character['PRIV']}
+|  Priv: {character['PRIV']}
 🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
@@ -82,16 +83,17 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+|
 🔹 Nombre: {character['Nombre']}
-| Raza: {character['Raza']}
+|  Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
-| Género: {character['Género']}
+|  Género: {character['Género']}
 🔹 Registro: {character['Fecha de Registro']}
-| SC: {character['SC']}
+|  SC: {character['SC']}
 🔹 Rank: {character['RANK']}
-| Nexo: {character['NEXO']}
+|  Nexo: {character['NEXO']}
 🔹 TR: {character['TR']}
-| Priv: {character['PRIV']}
+|  Priv: {character['PRIV']}
 🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
