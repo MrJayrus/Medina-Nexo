@@ -11,6 +11,12 @@ players_db = 'players.json'
 # Cargar base de datos de ids de usuarios local
 with open('ids.json', 'r') as file:
     data = json.load(file)
+usuario = data['users']
+administrador = data['admins']
+operador = data['ops']
+# Cargar base de datos de ids de usuarios local
+with open('ids.json', 'r') as file:
+    data = json.load(file)
 administrador = data['admins']
 
 # Función para verificar si un usuario es administrador
@@ -21,7 +27,7 @@ def is_admin(user_id):
 def registrar_accion(accion):
     fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
-    with open("registro.txt", "a") as archivo_registro:
+    with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
         archivo_registro.write(mensaje_registro)
 
 # Cargar datos de jugadores
@@ -47,22 +53,22 @@ def get_user_info_command(bot, message):
     characters = load_character_data()
 
     if is_admin(user_id):
-        # Administradores pueden acceder a la información de cualquier usuario
+    # Administradores pueden acceder a la información de cualquier usuario
         user_found = False
         for character in characters:
             if character["Nombre"] == user_to_lookup:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-                🔹 Nombre: {character['Nombre']}\n
-                | Raza: {character['Raza']}\n
-                🔹 Edad: {character['Edad']}\n
-                | Género: {character['Género']}\n
-                🔹 Registro: {character['Fecha de Registro']}\n
-                | SC: {character['SC']}\n
-                🔹 Rank: {character['RANK']}\n
-                | Nexo: {character['NEXO']}\n
-                🔹 TR: {character['TR']}\n
-                | Priv: {character['PRIV']}\n
-                🔹➖➖➖💠FIN💠➖➖➖🔹'''
+🔹 Nombre: {character['Nombre']}
+| Raza: {character['Raza']}
+🔹 Edad: {character['Edad']}
+| Género: {character['Género']}
+🔹 Registro: {character['Fecha de Registro']}
+| SC: {character['SC']}
+🔹 Rank: {character['RANK']}
+| Nexo: {character['NEXO']}
+🔹 TR: {character['TR']}
+| Priv: {character['PRIV']}
+🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")
@@ -76,17 +82,17 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-                🔹 Nombre: {character['Nombre']}\n
-                | Raza: {character['Raza']}\n
-                🔹 Edad: {character['Edad']}\n
-                | Género: {character['Género']}\n
-                🔹 Registro: {character['Fecha de Registro']}\n
-                | SC: {character['SC']}\n
-                🔹 Rank: {character['RANK']}\n
-                | Nexo: {character['NEXO']}\n
-                🔹 TR: {character['TR']}\n
-                | Priv: {character['PRIV']}\n
-                🔹➖➖➖💠FIN💠➖➖➖🔹'''
+🔹 Nombre: {character['Nombre']}
+| Raza: {character['Raza']}
+🔹 Edad: {character['Edad']}
+| Género: {character['Género']}
+🔹 Registro: {character['Fecha de Registro']}
+| SC: {character['SC']}
+🔹 Rank: {character['RANK']}
+| Nexo: {character['NEXO']}
+🔹 TR: {character['TR']}
+| Priv: {character['PRIV']}
+🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")

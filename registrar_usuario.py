@@ -124,5 +124,5 @@ def load_character_data():
 def registrar_accion(accion):
     fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
-    with open("registro.txt", "a") as archivo_registro:
+    with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
         archivo_registro.write(mensaje_registro)
