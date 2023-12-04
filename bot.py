@@ -221,6 +221,16 @@ def handle_getinfo(message):
     user_id = message.from_user.id
     registrar_accion(f"Se mostró GetinfO para el usuario: {user_id}")
 
+# Manejar mensajes /razas
+@bot.message_handler(commands=['razas'])
+@check_maintenance
+@increment_usage_count
+def handle_razas(message):
+    razas_command(bot, message)
+    save_user_id(message.from_user.id)
+    user_id = message.from_user.id
+    registrar_accion(f"Se mostró razas para el usuario: {user_id}")
+
 # Manejar mensajes /adminmenu
 @bot.message_handler(commands=['adminmenu']) # type: ignore
 @check_maintenance
