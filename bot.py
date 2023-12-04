@@ -3,7 +3,6 @@ import requests
 import time
 import threading
 import datetime
-# sdfsfsdfsdfsdfsf
 import json
 from functools import wraps
 from basicos import *
