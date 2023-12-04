@@ -261,5 +261,3 @@ def handle_opmenu(message):
 
 # FINAL DEL RESTO DEL CODIGO
 bot.polling(none_stop=True)
-
-# sdofsdfnosdnfosdnfosnfdosnfo
