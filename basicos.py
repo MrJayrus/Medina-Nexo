@@ -1,3 +1,8 @@
+import json
+
+with open('razas_db.json', 'r') as file:
+    razas = json.load(file)
+
 # Responder a /start
 def start_command(bot, message):
     bot.reply_to(message, '''🔹➖➖➖💠 * **Medina** * 💠➖➖➖🔹
@@ -61,3 +66,9 @@ def adminmenu_command(bot, message):
   | 
 🔹➖➖➖➖💠........💠➖➖➖➖🔹
 ''', parse_mode='Markdown')
+
+def razas_command(bot, message):
+    user_id = message.from_user.id
+    bot.send_message(user_id, "Aquí está la lista completa de razas:")
+    for raza in razas:
+        bot.send_message(user_id, f"{raza['Nombre']}: {raza['Detalle']}")

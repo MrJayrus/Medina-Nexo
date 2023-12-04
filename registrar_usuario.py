@@ -17,9 +17,9 @@ def register_command(bot, message):
 
     # Verificar si el usuario ya está registrado
     if any(character["ID de Usuario"] == user_id for character in characters):
-        bot.send_message(user_id, "¡Ya estás registrado! No puedes registrarte nuevamente, solo puedes tener un personaje.")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n¡Ya estás registrado! No puedes registrarte nuevamente, solo puedes tener un personaje.\n🔹➖➖💠......💠➖➖🔹""")
     else:
-        bot.send_message(user_id, "Por favor, ingresa el nombre de tu personaje a continuación")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- Para Registrarse necesitaré su nombre y los apellidos correspondientes a sus progenitores.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_name, bot)
 
 # Función para obtener el nombre del personaje
@@ -28,10 +28,10 @@ def get_character_name(message, bot):
     character_name = message.text
 
     if character_name:
-        bot.send_message(user_id, "Ahora, selecciona la raza que prefieras", reply_markup=create_race_keyboard())
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- Ahora selecciona la raza que prefieras.\n🔹➖➖💠......💠➖➖🔹""", reply_markup=create_race_keyboard())
         bot.register_next_step_handler(message, get_character_race, character_name, bot)
     else:
-        bot.send_message(user_id, "El nombre del personaje no puede estar vacío. Envia un nombre válido")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\nEl nombre del personaje no puede estar vacío. Envia un nombre válido\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_name, bot)
 
 # Función para crear un teclado con las opciones de raza
@@ -46,10 +46,10 @@ def get_character_race(message, character_name, bot):
     character_race = message.text
 
     if character_race in razas:
-        bot.send_message(user_id, "Ingresa la edad de tu personaje ahora")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- Mencione su edad actual.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_age, character_name, character_race, bot)
     else:
-        bot.send_message(user_id, "Selecciona una raza válida de las opciones que te proporcioné")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- Elija su raza acorde a las características especificadas por el Creador.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_race, character_name, bot)
         
 # Función para obtener la edad del personaje
@@ -58,10 +58,10 @@ def get_character_age(message, character_name, character_race, bot):
     character_age = message.text
 
     if character_age.isdigit():
-        bot.send_message(user_id, "Qué género será tu personaje? (masculino o femenino):")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- Establezca el género de su paralelo.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_gender, character_name, character_race, character_age, bot)
     else:
-        bot.send_message(user_id, "Me quieres timar? Envía un número")
+        bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\nMe quieres timar? Envía un número.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_age, character_name, character_race, bot)
 
 # Función para obtener el género del personaje
@@ -76,7 +76,7 @@ def get_character_gender(message, character_name, character_race, character_age,
     elif character_gender in ["femenino", "f", "Femenino", "fe"]:
         character_gender = "femenino"
     else:
-        bot.reply_to(message, "No se que genero es ese. Solo existen dos géneros, envía uno de esos.")
+        bot.reply_to(message, """🔹➖💠 Medina 💠➖🔹\nNo se que género es ese. Solo existen dos géneros, envía uno de esos.\n🔹➖➖💠......💠➖➖🔹""")
         bot.register_next_step_handler(message, get_character_gender, character_name, character_race, character_age, bot)
         return
 
@@ -87,7 +87,7 @@ def get_character_gender(message, character_name, character_race, character_age,
         "Edad": character_age,
         "Género": character_gender,
         "ID de Usuario": user_id,
-        "Fecha de Registro:": datetime.datetime.now().strftime("%d-%m-%Y")
+        "Fecha_de_Registro": datetime.datetime.now().strftime("%d-%m-%Y")
     }
 
     # Valores iniciales en el perfil
@@ -100,7 +100,7 @@ def get_character_gender(message, character_name, character_race, character_age,
     # Guardar los datos en la base de datos (players.json)
     save_character_data(character_data)
 
-    bot.send_message(user_id, "Eso es todo, ya se como será tu personaje, buen viaje por nuestro increíble mundo! Por ahora no puedes realizar más acciones lamentablemente.")
+    bot.send_message(user_id, """🔹➖💠 Medina 💠➖🔹\n- El registro se ha completado! Ahora tiene total libertad para andar en NeoTerra. Me retiro!\n🔹➖➖💠......💠➖➖🔹""")
 
 # Función para guardar los datos del personaje en la base de datos
 def save_character_data(character_data):

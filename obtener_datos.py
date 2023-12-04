@@ -58,12 +58,11 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-|
 🔹 Nombre: {character['Nombre']}
 |  Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
 |  Género: {character['Género']}
-🔹 Registro: {character['Fecha de Registro']}
+🔹 Registro: {character['Fecha_de_Registro']}
 |  SC: {character['SC']}
 🔹 Rank: {character['RANK']}
 |  Nexo: {character['NEXO']}
@@ -83,12 +82,11 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-|
 🔹 Nombre: {character['Nombre']}
 |  Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
 |  Género: {character['Género']}
-🔹 Registro: {character['Fecha de Registro']}
+🔹 Registro: {character['Fecha_de_Registro']}
 |  SC: {character['SC']}
 🔹 Rank: {character['RANK']}
 |  Nexo: {character['NEXO']}
