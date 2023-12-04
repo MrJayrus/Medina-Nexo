@@ -39,6 +39,7 @@ def get_user_info_command(bot, message):
     try:
         user_to_lookup = message.text.split(" ")[1]
     except IndexError:
+        # -> MODIFICAR PARA QUE SI UN USUARIO ENVIA EL COMANDO /GETINFO SIN UN NOMBRE DE USUARIO EL BOT LE ENVIA SU PROPIA INFORMACION DENTRO DE LA BASE DE DATOS
         bot.reply_to(message, "Para darte la informacion que quieres debes usar el comando asi: /getinfo MrJayrus")
         return
 
@@ -50,16 +51,18 @@ def get_user_info_command(bot, message):
         user_found = False
         for character in characters:
             if character["Nombre"] == user_to_lookup:
-                user_info = f"Nombre: {character['Nombre']}\n" \
-                            f"Raza: {character['Raza']}\n" \
-                            f"Edad: {character['Edad']}\n" \
-                            f"Género: {character['Género']}\n" \
-                            f"Registro: {character['Fecha de Registro']}\n" \
-                            f"SC: {character['SC']}\n" \
-                            f"Rank: {character['RANK']}\n" \
-                            f"Nexo: {character['NEXO']}\n" \
-                            f"TR: {character['TR']}\n" \
-                            f"Priv: {character['PRIV']}"
+                user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+                🔹 Nombre: {character['Nombre']}\n
+                | Raza: {character['Raza']}\n
+                🔹 Edad: {character['Edad']}\n
+                | Género: {character['Género']}\n
+                🔹 Registro: {character['Fecha de Registro']}\n
+                | SC: {character['SC']}\n
+                🔹 Rank: {character['RANK']}\n
+                | Nexo: {character['NEXO']}\n
+                🔹 TR: {character['TR']}\n
+                | Priv: {character['PRIV']}\n
+                🔹➖➖➖💠FIN💠➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")
@@ -72,21 +75,23 @@ def get_user_info_command(bot, message):
         user_found = False
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
-                user_info = f"Nombre: {character['Nombre']}\n" \
-                            f"Raza: {character['Raza']}\n" \
-                            f"Edad: {character['Edad']}\n" \
-                            f"Género: {character['Género']}\n" \
-                            f"Registro: {character['Fecha de Registro']}\n" \
-                            f"SC: {character['SC']}\n" \
-                            f"Rank: {character['RANK']}\n" \
-                            f"Nexo: {character['NEXO']}\n" \
-                            f"TR: {character['TR']}\n" \
-                            f"Priv: {character['PRIV']}"
+                user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+                🔹 Nombre: {character['Nombre']}\n
+                | Raza: {character['Raza']}\n
+                🔹 Edad: {character['Edad']}\n
+                | Género: {character['Género']}\n
+                🔹 Registro: {character['Fecha de Registro']}\n
+                | SC: {character['SC']}\n
+                🔹 Rank: {character['RANK']}\n
+                | Nexo: {character['NEXO']}\n
+                🔹 TR: {character['TR']}\n
+                | Priv: {character['PRIV']}\n
+                🔹➖➖➖💠FIN💠➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")
                 break
 
-        if not user_found:
+        if not user_found:# Si no se encuentra el usuario
             bot.reply_to(message, "No tienes permiso para ver su información!")
             registrar_accion(f"El usuario: {user_id} trató de buscar el personaje: {user_to_lookup}")

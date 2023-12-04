@@ -87,7 +87,7 @@ def get_character_gender(message, character_name, character_race, character_age,
         "Edad": character_age,
         "Género": character_gender,
         "ID de Usuario": user_id,
-        "Fecha de Registro": str(datetime.datetime.now())
+        "Fecha de Registro:": datetime.datetime.now().strftime("%d-%m-%Y")
     }
 
     # Valores iniciales en el perfil
