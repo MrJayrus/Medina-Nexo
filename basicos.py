@@ -14,7 +14,7 @@ def start_command(bot, message):
   |   opciones que puedes tomar. 
 🔹- - - - - - -💠- - - - - - -🔹
   |   - El Creador te desea una feliz 
-🔹 estancia! 
+🔹 estancia!
   | 
 🔹➖➖➖➖💠........💠➖➖➖➖🔹
 ''', parse_mode='Markdown')
