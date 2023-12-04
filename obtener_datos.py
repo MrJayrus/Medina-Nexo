@@ -58,41 +58,43 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+|
 🔹 Nombre: {character['Nombre']}
-|  Raza: {character['Raza']}
+|     Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
-|  Género: {character['Género']}
+|     Género: {character['Género']}
 🔹 Registro: {character['Fecha_de_Registro']}
-|  SC: {character['SC']}
+|     SC: {character['SC']}
 🔹 Rank: {character['RANK']}
-|  Nexo: {character['NEXO']}
+|     Nexo: {character['NEXO']}
 🔹 TR: {character['TR']}
-|  Priv: {character['PRIV']}
-🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
+|
+🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")
                 break
 
         if not user_found:
-            bot.reply_to(message, "No encontré ese suario. Verifica el nombre del usuario e intentalo de nuevo.")
+            bot.reply_to(message, "No encontré ese usuario. Verifica el nombre del usuario e intentalo de nuevo.")
     else:
         # Usuarios normales solo pueden acceder a su propia información
         user_found = False
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
+|
 🔹 Nombre: {character['Nombre']}
-|  Raza: {character['Raza']}
+|     Raza: {character['Raza']}
 🔹 Edad: {character['Edad']}
-|  Género: {character['Género']}
+|     Género: {character['Género']}
 🔹 Registro: {character['Fecha_de_Registro']}
-|  SC: {character['SC']}
+|     SC: {character['SC']}
 🔹 Rank: {character['RANK']}
-|  Nexo: {character['NEXO']}
+|     Nexo: {character['NEXO']}
 🔹 TR: {character['TR']}
-|  Priv: {character['PRIV']}
-🔹➖➖➖ 💠 FIN 💠 ➖➖➖🔹'''
+|
+🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
                 registrar_accion(f"El usuario: {user_id} buscó el personaje: {user_to_lookup}")
