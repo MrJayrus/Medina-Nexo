@@ -5,7 +5,7 @@ import threading
 import datetime
 import json
 from functools import wraps
-from mod01 import *
+from basicos import *
 from notificar import op_notify_command
 from registrar_usuario import register_command
 from obtener_datos import get_user_info_command
