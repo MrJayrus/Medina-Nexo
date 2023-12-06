@@ -27,21 +27,18 @@ def start_command(bot, message):
 #Responder a /help
 def help_command(bot, message):
     bot.reply_to(message, '''🔹➖➖➖💠 * **AYUDA** * 💠➖➖➖🔹
-  |
-🔹 /start - Mensaje de bienvenida
-  |
-🔹 /help - Esta ayuda
-  |
-🔹 /register - Registrar jugador
-  |
-🔹 /getinfo - Estadisticas de jugador
-  |
+
+ /start - Mensaje de bienvenida
+ /help - Esta ayuda
+ /register - Registrar jugador
+ /getinfo - Estadisticas de jugador
+ /razas - Mostrar razas disponibles
+
 🔹- - - - 💠**ADMINs**💠 - - - -🔹
-  |
-🔹 /adminmenu - Administración
-  |
-🔹 /opmenu - Desarrollo
-  | 
+
+ /adminmenu - Administración
+ /opmenu - Desarrollo
+
 🔹➖➖➖➖💠..FIN..💠➖➖➖➖🔹
 ''',parse_mode='Markdown')
 
