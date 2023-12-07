@@ -1,32 +1,22 @@
 import json
 
-with open('razas_db.json', 'r') as file:
+with open('razas_db.json', 'r', encoding='utf-8') as file:
     razas = json.load(file)
 
 # Responder a /start
 def start_command(bot, message):
-    bot.reply_to(message, '''🔹➖➖➖💠 * **Medina** * 💠➖➖➖🔹
-  |   - Según las órdenes del Creador 
-🔹 Mi deber es asistirte en lo que 
-  |   necesites. A partir de hoy estoy 
-🔹 totalmente disponible para ti. 
-  |   Me encargaré de guiarte en tu viaje 
-🔹 y ayudarte en tu recopilación 
-  |   de la información! 
-🔹- - - - - - -💠- - - - - - -🔹
-  |   - En caso de ser requerida, usa el 
-🔹 comando /help y te mostraré varias
-  |   opciones que puedes tomar. 
-🔹- - - - - - -💠- - - - - - -🔹
-  |   - El Creador te desea una feliz 
-🔹 estancia!
-  | 
-🔹➖➖➖➖💠........💠➖➖➖➖🔹
+    bot.reply_to(message, '''🔹➖➖💠* **Medina** *💠➖➖🔹
+- Según las órdenes del Creador, mi deber es asistirte en lo que necesites. A partir de hoy estoy totalmente disponible para ti. Me encargaré de guiarte en tu viaje y ayudarte en tu recopilación de la información! 
+ 🔹- - - - - - - - -💠- - - - - - - - -🔹
+- En caso de ser requerida, usa el comando /help y te mostraré varias opciones que puedes tomar. 
+ 🔹- - - - - - - - -💠- - - - - - - - -🔹
+- El Creador te desea una feliz estancia!
+🔹➖➖➖💠......💠➖➖➖🔹
 ''', parse_mode='Markdown')
     
 #Responder a /help
 def help_command(bot, message):
-    bot.reply_to(message, '''🔹➖➖➖💠 * **AYUDA** * 💠➖➖➖🔹
+    bot.reply_to(message, '''🔹➖➖💠 * **AYUDA** * 💠➖➖🔹
 
  /start - Mensaje de bienvenida
  /help - Esta ayuda
@@ -36,10 +26,10 @@ def help_command(bot, message):
 
 🔹- - - - 💠**ADMINs**💠 - - - -🔹
 
- /adminmenu - Administración
+ /amenu - Administración
  /opmenu - Desarrollo
 
-🔹➖➖➖➖💠..FIN..💠➖➖➖➖🔹
+🔹➖➖💠 .... **FIN** .... 💠➖➖🔹
 ''',parse_mode='Markdown')
 
 # Responder a /opmenu

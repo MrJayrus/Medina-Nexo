@@ -232,9 +232,9 @@ def handle_razas(message):
     registrar_accion(f"Se mostró razas para el usuario: {user_id}")
 
 # Manejar mensajes /adminmenu
-@bot.message_handler(commands=['adminmenu']) # type: ignore
+@bot.message_handler(commands=['amenu']) # type: ignore
 @check_maintenance
-def handle_adminmenu(message):
+def handle_amenu(message):
     adminmenu_command(bot, message)
     save_user_id(message.from_user.id)
     user_id = message.from_user.id
