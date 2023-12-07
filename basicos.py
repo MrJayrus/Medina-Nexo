@@ -1,7 +1,5 @@
 import json
-
-with open('razas_db.json', 'r', encoding='utf-8') as file:
-    razas = json.load(file)
+from config import *
 
 # Responder a /start
 def start_command(bot, message):

@@ -9,23 +9,7 @@ from basicos import *
 from notificar import op_notify_command
 from registrar_usuario import register_command
 from obtener_datos import get_user_info_command
-
-# Definir API del bot
-bot = telebot.TeleBot('6044431859:AAHru48AtGHVDslBPOD8NwY3KrrNQr2NxME')
-
-# Cargar base de datos de ids de usuarios local
-with open('ids.json', 'r') as file:
-    data = json.load(file)
-
-# Variables
-bot_activo = False
-usage_count = 1
-start_time = time.time()
-id_file = 'ids.json'
-maintenance_mode = True
-usuario = data['users']
-administrador = data['admins']
-operador = data['ops']
+from config import *
 
 # Función para manejar la reconexión
 def reconnect():
@@ -76,7 +60,7 @@ def is_op(user_id):
 
 # Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
 def registrar_accion(accion):
-    fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    fecha_hora_actual = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
     with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
         archivo_registro.write(mensaje_registro)
@@ -219,7 +203,6 @@ def handle_getinfo(message):
     get_user_info_command(bot, message)
     save_user_id(message.from_user.id)
     user_id = message.from_user.id
-    registrar_accion(f"Se mostró GetinfO para el usuario: {user_id}")
 
 # Manejar mensajes /razas
 @bot.message_handler(commands=['razas'])

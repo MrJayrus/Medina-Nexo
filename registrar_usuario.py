@@ -3,10 +3,6 @@ import datetime
 import json
 from functools import wraps
 
-# Variables predefinidas
-players_db = 'players.json'
-razas = ["Human of Flames", "Lunar Human", "Phantom Human", "Storm Human", "Shadow", "Human of the Light", "Wolfman", "Divine Human"]
-
 def load_character_data():
     try:
         with open(players_db, 'r') as file:
