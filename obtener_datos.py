@@ -5,19 +5,7 @@ import threading
 import datetime
 import json
 from functools import wraps
-
-# Variables predefinidas
-players_db = 'players.json'
-# Cargar base de datos de ids de usuarios local
-with open('ids.json', 'r') as file:
-    data = json.load(file)
-usuario = data['users']
-administrador = data['admins']
-operador = data['ops']
-# Cargar base de datos de ids de usuarios local
-with open('ids.json', 'r') as file:
-    data = json.load(file)
-administrador = data['admins']
+from config import *
 
 # Función para verificar si un usuario es administrador
 def is_admin(user_id):
@@ -65,11 +53,13 @@ Raza: {character['Raza']}
 Edad: {character['Edad']}
 Género: {character['Género']}
 SC: {character['SC']}
-Rank: {character['RANK']}
+Rango: {character['RANK']}
 Nexo: {character['NEXO']}
 TR: {character['TR']}
 🔹- - - - - - -💠- - - - - - -🔹
 Registro: {character['Fecha_de_Registro']}
+ID del usuario: {character['ID de Usuario']}
+Privilejios: {character['PRIV']}
 🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
@@ -90,7 +80,7 @@ Edad: {character['Edad']}
 Género: {character['Género']}
 Registro: {character['Fecha_de_Registro']}
 SC: {character['SC']}
-Rank: {character['RANK']}
+Rango: {character['RANK']}
 Nexo: {character['NEXO']}
 TR: {character['TR']}
 🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
