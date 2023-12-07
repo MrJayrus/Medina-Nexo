@@ -1,31 +1,28 @@
+
 import datetime
 import json
+from functools import wraps
 
 # Variables predefinidas
 players_db = 'players.json'
+razas = ["Human of Flames", "Lunar Human", "Phantom Human", "Storm Human", "Shadow", "Human of the Light", "Wolfman", "Divine Human"]
 
-# Cargar datos de jugadores
 def load_character_data():
     try:
         with open(players_db, 'r') as file:
             data = json.load(file)
             return data.get('characters', [])
-    except FileNotFoundError:
-        # Si el archivo no existe, retorna una lista vacía
-        print("No habian personajes regiatrados o no habia base de datos")
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
 
-# Registrar accion
+# Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
 def registrar_accion(accion):
     fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
     with open("registro.txt", "a") as archivo_registro:
         archivo_registro.write(mensaje_registro)
 
-with open('razas_db.json', 'r', encoding='utf-8') as file:
-    razas_db = json.load(file)
-    razas = ", ".join([raza['Nombre'] for raza in razas_db])
-
+# Función para manejar el comando /register
 def register_command(bot, message):
     user_id = message.from_user.id
     characters = load_character_data()
@@ -84,37 +81,37 @@ def get_character_gender(message, character_name, character_race, character_age,
     # Acepta una variedad de entradas para "femenino"
     elif character_gender in ["femenino", "f", "Femenino", "fe"]:
         character_gender = "femenino"
-
-        # Datos del personaje
-        character_data = {
-            "Nombre": character_name,
-            "Raza": character_race,
-            "Edad": character_age,
-            "Género": character_gender,
-            "ID de Usuario": user_id,
-            "Fecha de Registro": str(datetime.datetime.now())
-        }
-
-        # Valores iniciales en el perfil
-        character_data["SC"] = 0  # Vida o energía
-        character_data["RANK"] = "none"
-        character_data["NEXO"] = 100
-        character_data["TR"] = 0
-        character_data["PRIV"] = "P"
-
-        # Guardar los datos en la base de datos (players.json)
-        save_character_data(character_data, bot)
-
-        bot.send_message(user_id, "💠 El registro se ha completado! Ahora tiene total libertad para andar en NeoTerra. Me retiro!")
     else:
-        bot.send_message(user_id, "❌ No se que género es ese. Solo existen dos géneros, envía uno de esos.")
+        bot.reply_to(message, "❌ No se que genero es ese. Solo existen dos géneros, envía uno de esos.")
         bot.register_next_step_handler(message, get_character_gender, character_name, character_race, character_age, bot)
+        return
+
+    # Datos del personaje
+    character_data = {
+        "Nombre": character_name,
+        "Raza": character_race,
+        "Edad": character_age,
+        "Género": character_gender,
+        "ID de Usuario": user_id,
+        "Fecha_de_Registro": datetime.datetime.now().strftime("%d-%m-%Y")
+    }
+
+    # Valores iniciales en el perfil
+    character_data["SC"] = 0  # Vida o energía
+    character_data["RANK"] = "none"
+    character_data["NEXO"] = 100
+    character_data["TR"] = 0
+    character_data["PRIV"] = "P"
+
+    # Guardar los datos en la base de datos (players.json)
+    save_character_data(character_data)
+
+    bot.send_message(user_id, "💠 El registro se ha completado! Ahora tiene total libertad para andar en NeoTerra. Me retiro!")
 
 # Función para guardar los datos del personaje en la base de datos
-def save_character_data(character_data, bot):
+def save_character_data(character_data):
     characters = load_character_data()
     characters.append(character_data)
 
     with open(players_db, 'w') as file:
         json.dump({"characters": characters}, file)
-
