@@ -57,18 +57,19 @@ def get_user_info_command(bot, message):
         user_found = False
         for character in characters:
             if character["Nombre"] == user_to_lookup:
-                user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-|
-🔹 Nombre: {character['Nombre']}
-|     Raza: {character['Raza']}
-🔹 Edad: {character['Edad']}
-|     Género: {character['Género']}
-🔹 Registro: {character['Fecha_de_Registro']}
-|     SC: {character['SC']}
-🔹 Rank: {character['RANK']}
-|     Nexo: {character['NEXO']}
-🔹 TR: {character['TR']}
-|
+                user_info = f'''🔹➖💠 Medina 💠➖🔹
+- Enseguida Creador, aquí tiene la información que pidió:
+🔹- - - - - - -💠- - - - - - -🔹
+Nombre: {character['Nombre']}
+Raza: {character['Raza']}
+Edad: {character['Edad']}
+Género: {character['Género']}
+SC: {character['SC']}
+Rank: {character['RANK']}
+Nexo: {character['NEXO']}
+TR: {character['TR']}
+🔹- - - - - - -💠- - - - - - -🔹
+Registro: {character['Fecha_de_Registro']}
 🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
@@ -83,17 +84,15 @@ def get_user_info_command(bot, message):
         for character in characters:
             if character["Nombre"] == user_to_lookup and character["ID de Usuario"] == user_id:
                 user_info = f'''🔹➖➖➖💠 Medina 💠➖➖➖🔹
-|
-🔹 Nombre: {character['Nombre']}
-|     Raza: {character['Raza']}
-🔹 Edad: {character['Edad']}
-|     Género: {character['Género']}
-🔹 Registro: {character['Fecha_de_Registro']}
-|     SC: {character['SC']}
-🔹 Rank: {character['RANK']}
-|     Nexo: {character['NEXO']}
-🔹 TR: {character['TR']}
-|
+Nombre: {character['Nombre']}
+Raza: {character['Raza']}
+Edad: {character['Edad']}
+Género: {character['Género']}
+Registro: {character['Fecha_de_Registro']}
+SC: {character['SC']}
+Rank: {character['RANK']}
+Nexo: {character['NEXO']}
+TR: {character['TR']}
 🔹➖➖➖ 💠 ...... 💠 ➖➖➖🔹'''
                 bot.reply_to(message, user_info)
                 user_found = True
