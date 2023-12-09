@@ -190,10 +190,15 @@ def handle_help(message):
 @check_maintenance
 @increment_usage_count
 def handle_register(message):
-    register_command(bot, message)
-    save_user_id(message.from_user.id)
-    user_id = message.from_user.id
-    registrar_accion(f"Se mostró RegisteR para el usuario: {user_id}")
+    if message.chat.type != 'private':
+        bot.reply_to(message, f'Clic en [MedinaNexo](https://t.me/UltraRoleGameBot) para ir al privado por favor.', parse_mode='Markdown')
+        user_id = message.from_user.id
+        registrar_accion(f"El usuario: {user_id} uso el comando register en publico")
+    else:
+        register_command(bot, message)
+        save_user_id(message.from_user.id)
+        user_id = message.from_user.id
+        registrar_accion(f"Se mostró RegisteR para el usuario: {user_id}")
 
 # Manejar mensajes /getinfo
 @bot.message_handler(commands=['getinfo'])
