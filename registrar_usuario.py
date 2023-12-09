@@ -2,6 +2,7 @@
 import datetime
 import json
 from functools import wraps
+from config import *
 
 def load_character_data():
     try:
@@ -27,7 +28,7 @@ def register_command(bot, message):
     if any(character["ID de Usuario"] == user_id for character in characters):
         bot.send_message(user_id, "⛔️ ¡Ya estás registrado! Solo puedes tener un personaje.", parse_mode='Markdown')
     else:
-        bot.send_message(user_id, "💠 Para Registrarse necesitaré su nombre y los apellidos correspondientes a sus progenitores. Sin espacios.", parse_mode='Markdown')
+        bot.send_message(user_id, "💠 Para Registrarse necesitaré su nombre y los apellidos correspondientes a sus progenitores. Los espacios serán reemplazados por (_).", parse_mode='Markdown')
         bot.register_next_step_handler(message, get_character_name, bot)
 
 # Función para obtener el nombre del personaje
@@ -36,7 +37,7 @@ def get_character_name(message, bot):
     character_name = message.text
 
     if character_name:
-        bot.send_message(user_id, f"💠 Elija su raza acorde a las características especificadas por el Creador:\n{razas}", parse_mode='Markdown')
+        bot.send_message(user_id, f"razas_del_registro", parse_mode='Markdown')
         bot.register_next_step_handler(message, get_character_race, character_name, bot)
     else:
         bot.send_message(user_id, "❌ El nombre del personaje no puede estar vacío. Envia un nombre válido", parse_mode='Markdown')
@@ -51,7 +52,7 @@ def get_character_race(message, character_name, bot):
         bot.send_message(user_id, "💠 Mencione su edad actual.", parse_mode='Markdown')
         bot.register_next_step_handler(message, get_character_age, character_name, character_race, bot)
     else:
-        bot.send_message(user_id, f"💠 Elija su raza acorde a las características especificadas por el Creador:\n{razas}", parse_mode='Markdown')
+        bot.send_message(user_id, f"razas_del_registro", parse_mode='Markdown')
         bot.register_next_step_handler(message, get_character_race, character_name, bot)
         
 # Función para obtener la edad del personaje
@@ -83,8 +84,9 @@ def get_character_gender(message, character_name, character_race, character_age,
         return
 
     # Datos del personaje
+    character_name_rep = character_name.replace(" ", "_")
     character_data = {
-        "Nombre": character_name,
+        "Nombre": character_name_rep,
         "Raza": character_race,
         "Edad": character_age,
         "Género": character_gender,
