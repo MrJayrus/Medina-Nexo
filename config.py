@@ -1,6 +1,7 @@
 import json
 import telebot
 import time
+import datetime
 
 # Cargar la base de datos de los ID
 with open('ids.json', 'r') as file:
@@ -23,6 +24,37 @@ players_db = 'players.json'
 usuario = data['users']
 administrador = data['admins']
 operador = data['ops']
+
+# Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
+def registrar_accion(accion):
+    fecha_hora_actual = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
+    with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
+        archivo_registro.write(mensaje_registro)
+
+# Función para verificar si un usuario es administrador
+def is_admin(user_id):
+    return user_id in administrador
+
+# Función para verificar si un usuario es desarrollador
+def is_op(user_id):
+    return user_id in operador
+
+# Función para guardar los datos del personaje en la base de datos
+def save_character_data(character_data):
+    characters = load_character_data()
+    characters.append(character_data)
+
+    with open(players_db, 'w') as file:
+        json.dump({"characters": characters}, file)
+
+def load_character_data():
+    try:
+        with open(players_db, 'r') as file:
+            data = json.load(file)
+            return data.get('characters', [])
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
 
 # Variables con textos largos
 razas_del_registro = """🔹➖➖💠 Medina 💠➖➖🔹
@@ -70,6 +102,7 @@ help_message = """🔹➖➖💠 * **AYUDA** * 💠➖➖🔹
  /register - Registrar jugador
  /getinfo - Estadisticas de jugador
  /razas - Mostrar razas disponibles
+ /delete - Eliminar un personaje
 
 🔹- - - - 💠**ADMINs**💠 - - - -🔹
 

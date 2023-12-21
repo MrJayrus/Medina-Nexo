@@ -6,10 +6,11 @@ import datetime
 import json
 from functools import wraps
 from basicos import *
+from config import *
 from notificar import op_notify_command
 from registrar_usuario import register_command
 from obtener_datos import get_user_info_command
-from config import *
+from borrar_usuario import delete_command
 
 # Función para manejar la reconexión
 def reconnect():
@@ -49,21 +50,6 @@ def load_user_ids():
         usuario = data['users']
         administrador = data['admins']
         operador = data['ops']
-
-# Función para verificar si un usuario es administrador
-def is_admin(user_id):
-    return user_id in administrador
-
-# Función para verificar si un usuario es desarrollador
-def is_op(user_id):
-    return user_id in operador
-
-# Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
-def registrar_accion(accion):
-    fecha_hora_actual = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
-    with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
-        archivo_registro.write(mensaje_registro)
 
 # Función para verificar si el modo de mantenimiento está activado
 def check_maintenance(func):
@@ -228,7 +214,7 @@ def handle_amenu(message):
     user_id = message.from_user.id
     registrar_accion(f"Se mostró adminmenu para el usuario: {user_id}")
 
-# Manejar mensajes /adminmenu
+# Manejar mensajes /notify
 @bot.message_handler(commands=['notify'])
 def handle_notify(message):
     save_user_id(message.from_user.id)
@@ -244,6 +230,21 @@ def handle_notify(message):
     else:
         registrar_accion(f"Se denego NOTIFY para el usuario: {user_id}")
         bot.reply_to(message, "⚠️ No tienes permiso para realizar esta acción!")
+        
+# Manejar mensajes /register
+@bot.message_handler(commands=['delete'])
+@check_maintenance
+@increment_usage_count
+def handle_delete_command(message):
+    if message.chat.type != 'private':
+        bot.reply_to(message, f'Clic en [MedinaNexo](https://t.me/UltraRoleGameBot) para ir al privado por favor.', parse_mode='Markdown')
+        user_id = message.from_user.id
+        registrar_accion(f"El usuario: {user_id} uso el comando delete en publico")
+    else:
+        delete_command(bot, message)
+        save_user_id(message.from_user.id)
+        user_id = message.from_user.id
+        registrar_accion(f"( !!! )El usuario: {user_id} uso el comando delete")
 
 # Manejar comando /OPMENU
 @bot.message_handler(commands=['opmenu'])
