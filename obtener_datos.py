@@ -7,27 +7,6 @@ import json
 from functools import wraps
 from config import *
 
-# Función para verificar si un usuario es administrador
-def is_admin(user_id):
-    return user_id in administrador
-
-# Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
-def registrar_accion(accion):
-    fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
-    with open("registro.txt", "a", encoding='utf-8') as archivo_registro:
-        archivo_registro.write(mensaje_registro)
-
-# Cargar datos de jugadores
-def load_character_data():
-    try:
-        with open(players_db, 'r') as file:
-            data = json.load(file)
-            return data.get('characters', [])
-    except FileNotFoundError:
-        # Si el archivo no existe, retorna una lista vacía
-        return []
-
 def get_user_info_command(bot, message):
     user_id = message.from_user.id
     try:

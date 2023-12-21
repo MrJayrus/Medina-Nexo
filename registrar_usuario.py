@@ -1,23 +1,7 @@
-
 import datetime
 import json
 from functools import wraps
 from config import *
-
-def load_character_data():
-    try:
-        with open(players_db, 'r') as file:
-            data = json.load(file)
-            return data.get('characters', [])
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
-
-# Registrar accion en el archivo registro.txt ubicado en la msma carpeta que este archivo
-def registrar_accion(accion):
-    fecha_hora_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    mensaje_registro = f"{fecha_hora_actual} - {accion}\n"
-    with open("registro.txt", "a") as archivo_registro:
-        archivo_registro.write(mensaje_registro)
 
 # Función para manejar el comando /register
 def register_command(bot, message):
@@ -105,11 +89,3 @@ def get_character_gender(message, character_name, character_race, character_age,
     save_character_data(character_data)
 
     bot.send_message(user_id, "💠 El registro se ha completado! Ahora tiene total libertad para andar en NeoTerra. Me retiro!")
-
-# Función para guardar los datos del personaje en la base de datos
-def save_character_data(character_data):
-    characters = load_character_data()
-    characters.append(character_data)
-
-    with open(players_db, 'w') as file:
-        json.dump({"characters": characters}, file)
